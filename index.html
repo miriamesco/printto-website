@@ -4,92 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Printto</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="icon" href="./img/favicon.png">
     <script src="animations.js" defer></script>
 </head>
 
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav__logo">
-                <img src="./img/logo_transparente_baja.png" alt="logo">
-            </div>
-            <div class="nav__menu">
-                <a href="index.html" class="nav__link">Inicio</a>
-                <a href="#acerca_de" class="nav__link">Acerca de Printto</a>
-                <button class="btn btn--yellow">Reservar</button>
+    <!-- Header con Navbar de Bootstrap -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="./img/logo_transparente_baja.png" alt="logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#acerca_de">Acerca de Printto</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-warning">Reservar</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- Section 1 - Hero -->
-        <section class="hero">
-            <div class="hero__content">
-                <img src="./img/logo_transparente_baja.png" alt="printto" class="hero__logo">
-                <h3 class="hero__title">Una forma innovadora de compartir tus recuerdos</h3>
-                <button class="btn btn--pink">¡RESERVÁ PRINTTO!</button>
+        <!-- Hero Section -->
+        <section class="hero-section py-5 text-center position-relative">
+            <div class="hero-content container position-relative">
+                <img src="./img/logo_transparente_baja.png" alt="printto" class="img-fluid mb-4 hero-logo">
+                <h3 class="mb-4 text-white">Una forma innovadora de compartir tus recuerdos</h3>
+                <button class="btn btn-printto-pink btn-lg">¡RESERVÁ PRINTTO!</button>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- Problema Section -->
+        <section class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-4">¿ABURRIDO DE LAS FOTOCABINAS TRADICIONALES?</h2>
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <p class="lead">LAS FOTOCABINAS TRADICIONALES SUELEN OFRECER UNA EXPERIENCIA ESTÁTICA Y LIMITADA, CON OPCIONES DE PERSONALIZACIÓN Y CREATIVIDAD BASTANTE LIMITADAS.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="./img/cabina-de-fotos (4).png" alt="Icono fotocabina" class="img-fluid">
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Section 2 - Problema -->
-        <section class="problema">
-            <div class="S2">
-                <h2 class="section__title">¿ABURRIDO DE LAS FOTOCABINAS TRADICIONALES?</h2>
-            </div>
-            <div class="problema__content">
-                <p class="problema__text">LAS FOTOCABINAS TRADICIONALES SUELEN OFRECER UNA EXPERIENCIA ESTÁTICA Y LIMITADA, CON OPCIONES DE PERSONALIZACIÓN Y CREATIVIDAD BASTANTE LIMITADAS.</p>
-                <div class="problema__icon">
-                    <img src="./img/cabina-de-fotos (4).png" alt="Icono fotocabina">
+        <!-- Video Section -->
+        <section id="acerca_de" class="video-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 text-center text-lg-start text-dark">
+                        <h2 class="mb-4 text-dark">PRINTTO: LA EVOLUCIÓN DE<br>LAS FOTOCABINAS</h2>
+                        <div class="mb-4">
+                            <p class="mb-2 text-dark">¿Estás Cansado De Las Limitaciones Y<br>Frustraciones De Las Fotocabinas<br>Tradicionales?</p>
+                            <p class="text-dark">¡Entonces Es Hora De Conocer Printto!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/X0FiTCcy2ro?si=yXjndJGCxHmv9Oa9" 
+                                title="YouTube video player" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
 
-        <!-- Section 3 - Video -->
-        <section id="acerca_de" class="video">
-            <div class="video__wrapper">
-                <div class="video__content">
-                    <h2 class="section__title S3">PRINTTO: LA EVOLUCIÓN DE<br>LAS FOTOCABINAS</h2>
-                    <div class="video__text">
-                        <p>¿Estás Cansado De Las Limitaciones Y<br>Frustraciones De Las Fotocabinas<br>Tradicionales?</p>
-                        <p>¡Entonces Es Hora De Conocer Printto!</p>
+        <!-- Beneficios Section -->
+        <section class="beneficios-section py-5">
+            <div class="container text-center">
+                <h2 class="mb-5 beneficios-title">BENEFICIOS DE PRINTTO</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">
+                                <img src="./img/papel-picado (2).png" alt="Recuerdos" class="img-fluid">
+                            </div>
+                            <h5 class="beneficio-title">RECUERDOS TANGIBLES</h5>
+                            <p class="beneficio-description">Llévate a casa hermosas impresiones físicas de tus momentos especiales</p>
+                        </div>
                     </div>
-                </div>
-                <div class="video__container">
-                    <iframe class="video__iframe" width="560" height="315" 
-                        src="https://www.youtube.com/embed/X0FiTCcy2ro?si=yXjndJGCxHmv9Oa9" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4 - Beneficios -->
-        <section class="beneficios">
-            <h2 class="section__title">BENEFICIOS DE PRINTTO</h2>
-            <div class="beneficios__grid">
-                <div class="beneficio_left">
-                    <div class="beneficio__icon">
-                        <img src="./img/papel-picado (2).png" alt="Recuerdos">
+                    <div class="col-md-4">
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">
+                                <img src="./img/impresora.png" alt="Fotos" class="img-fluid">
+                            </div>
+                            <h5 class="beneficio-title">FOTOS ILIMITADAS</h5>
+                            <p class="beneficio-description">Toma todas las fotos que quieras durante tu evento</p>
+                        </div>
                     </div>
-                    <div class="beneficio_text_1">RECUERDOS TANGIBLES</div>
-                </div>
-                <div class="beneficio_right">
-                    <div class="beneficio__icon_1">
-                        <img src="./img/impresora.png" alt="Fotos">
+                    <div class="col-md-4">
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">
+                                <img src="./img/retratos.png" alt="Personalizado" class="img-fluid">
+                            </div>
+                            <h5 class="beneficio-title">PERSONALIZADO</h5>
+                            <p class="beneficio-description">Adapta la experiencia a tu estilo y preferencias</p>
+                        </div>
                     </div>
-                    <div class="beneficio_text_2">FOTOS ILIMITADAS</div>
-                </div>
-                <div class="beneficio_left_2">
-                    <div class="beneficio__icon">
-                        <img src="./img/retratos.png" alt="Personalizado">
-                    </div>
-                    <div class="beneficio_text_3">PERSONALIZADO</div>
                 </div>
             </div>
         </section>
@@ -109,46 +139,57 @@
                 </div>
                 <button class="carousel__btn carousel__btn--next">›</button>
             </div>
-        </section>
-        <!-- Section 6 - CTA -->
-        <section id="reservar" class="cta">
-            <div class="cta__content">
-                <h2 class="section__title">¡ASEGURA MOMENTOS INOLVIDABLES!</h2>
-                <p class="cta__text">¿Listo para añadir un toque de diversión y emoción a tu próximo evento? ¡Reserva Printto ahora mismo y asegura recuerdos inolvidables para ti y tus invitados!</p>
-                <button class="btn btn--pink2">¡RESERVA PRINTTO!</button>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="reservar" class="cta-section py-5 text-center">
+            <div class="container">
+                <h2 class="mb-4">¡ASEGURA MOMENTOS INOLVIDABLES!</h2>
+                <p class="lead mb-4">¿Listo para añadir un toque de diversión y emoción a tu próximo evento? ¡Reserva Printto ahora mismo y asegura recuerdos inolvidables para ti y tus invitados!</p>
+                <button class="btn btn-printto-pink btn-lg">¡RESERVA PRINTTO!</button>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <h3 class="footer__title">SÍGUENOS Y MANTENTE INFORMADO</h3>
-        <div class="footer__content">
-            <div class="footer__contact">
-                <h4 class="footer__subtitle">CONTACTO</h4>
-                <div class="footer__item">
-                    <img src="./img/ubicacion.png" alt="ubicación" class="footer__icon">
-                    <p>Santiago, Chile</p>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <h3 class="text-center mb-4">SÍGUENOS Y MANTENTE INFORMADO</h3>
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4 mb-md-0 justify-content-center">
+                    <div class="bg-white text-dark p-4 rounded-4">
+                        <h4 class="h5 mb-3 text-center">CONTACTO</h4>
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="./img/ubicacion.png" alt="ubicación" class="me-2" width="20">
+                            <p class="mb-0">Santiago, Chile</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img src="./img/correo.png" alt="correo" class="me-2" width="20">
+                            <p class="mb-0">contacto@printto.cl</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer__item">
-                    <img src="./img/correo.png" alt="correo" class="footer__icon">
-                    <p>printto@xxxx.com</p>
+                <div class="col-md-4 mb-4 mb-md-0 justify-content-center">
+                    <div class="bg-white text-dark p-4 rounded-4">
+                        <h4 class="h5 mb-3 text-center">NUESTRAS REDES</h4>
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="./img/whatsapp.png" alt="whatsapp" class="me-2" width="20">
+                            <a href="https://api.whatsapp.com/send/?phone=56964582362" class="text-dark text-decoration-none">56964582362</a>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img src="./img/instagram (1).png" alt="instagram" class="me-2" width="20">
+                            <a href="https://www.instagram.com/printto.cl/" class="text-dark text-decoration-none">printto.cl</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer__social">
-                <h4 class="footer__subtitle">NUESTRAS REDES</h4>
-                <div class="footer__item">
-                    <img src="./img/whatsapp.png" alt="whatsapp" class="footer__icon">
-                    <p><a href="https://api.whatsapp.com/send/?phone=56964582362&text&type=phone_number&app_absent=0" target="blank" class="footer_link">56964582362</a></p>
-                </div>
-                <div class="footer__item">
-                    <img src="./img/instagram (1).png" alt="instagram" class="footer__icon">
-                    <p><a href="https://www.instagram.com/printto.cl/" target="blank" class="footer_link">printto.cl</a></p>
-                </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <small>© 2024 PRINTTO. TODOS LOS DERECHOS RESERVADOS | POLÍTICA DE PRIVACIDAD | TÉRMINOS Y CONDICIONES</small>
             </div>
-        </div>
-        <div class="footer__bottom">
-            <p>© 2024 PRINTTO. TODOS LOS DERECHOS RESERVADOS | POLÍTICA DE PRIVACIDAD | TÉRMINOS Y CONDICIONES</p>
         </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
