@@ -131,9 +131,9 @@ body {
     color:#666;
 }
 
-/*.beneficios-section {
-    background-color: #f8f9fa;
-}*/
+.beneficios-section {
+    min-height: 100vh;
+}
 
 .beneficios-title {
     color: #333;
@@ -207,5 +207,131 @@ body {
 }
 
 .col-md-4 {
+    display: flex;
+}
+
+/* Beneficios Section */
+.section__title {
+    font-size: 1.8rem;
+    color: #000; /* Título negro */
+    margin-bottom: 2rem;
+    font-weight: normal;
+}
+
+.beneficios__grid {
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.beneficio_left {
+    display: flex;
+    align-items: center; /* Alinea el texto y la imagen verticalmente */
+    gap: 1.5rem; /* Espacio entre la imagen y el texto */
+    background: #000; /* Fondo negro */
+    color: #fff; /* Color de texto blanco */
+    padding: 1.5rem;
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* Ajusta el ancho máximo según lo necesites */
+    margin: 1rem auto; /* Centra el div */
+    position: relative; /* Para que los elementos posicionados absolutamente se ubiquen dentro de este div */
+    margin-top: 1rem;
+}
+
+.beneficio_text{
+    font-size: 1.5rem; /* Tamaño de fuente para el texto */
+    font-weight: normal; /* Texto en negrita */
+    text-align: left; /* Alinea el texto a la izquierda */
+    color: #fff; /* Asegura que el texto sea blanco */
+    flex-grow: 1; /* Hace que el texto ocupe el espacio restante */
+    font-weight: normal;
+}
+
+
+.beneficio_right {
+    display: flex;
+    flex-direction: row-reverse; /* Invierte el orden de los hijos */
+    align-items: center; /* Alinea verticalmente */
+    gap: 1.5rem; /* Espacio entre imagen y texto */
+    background: #000; /* Fondo negro */
+    color: #fff; /* Color de texto blanco */
+    padding: 1.5rem;
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionamiento de hijos */
+}
+
+.beneficio__icon_1 img {
+    width: 180px; /* Tamaño de las imágenes */
+    height: 180px;
+    object-fit: cover; /* Recorta la imagen sin distorsionarla */
+    position: relative; /* Asegura que la imagen mantenga su posición */
+    left: 45px; /* Desplaza la imagen hacia la izquierda */
+    top: 10px; /* Desplaza la imagen hacia arriba */
+}
+.beneficio__icon_1 {
+    width: 110px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Evita que el ícono se reduzca */
+    position: relative; /* Permite que la imagen se ubique fuera del flujo normal */
+    left: -30px; /* Desplaza la imagen hacia la izquierda */
+    top: 0px; /* Desplaza la imagen hacia arriba */
+}
+
+.beneficio_left_2 {
+    display: flex;
+    align-items: center; /* Alinea el texto y la imagen verticalmente */
+    gap: 1.5rem; /* Espacio entre la imagen y el texto */
+    background: #000; /* Fondo negro */
+    color: #fff; /* Color de texto blanco */
+    padding: 1.5rem;
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* Ajusta el ancho máximo según lo necesites */
+    margin: 1rem auto; /* Centra el div */
+    position: relative; /* Para que los elementos posicionados absolutamente se ubiquen dentro de este div */
+    margin-top: 2rem;
+}
+
+.beneficio_text_3 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #fff;
+    margin: 0; /* Elimina márgenes redundantes */
+    text-align: center; /* Centra el texto internamente */
+    align-self: center; /* Asegura que se alinee en el centro si el contenedor es flexbox */
+    margin-right: 40px; /* Asegura que el texto no se superponga con la imagen */
+    margin-left: 40px; 
+}
+
+.beneficio__icon {
+    width: 110px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Evita que el ícono se reduzca */
+}
+
+.beneficio__icon img {
+    width: 180px; /* Tamaño de las imágenes */
+    height: 180px;
+    object-fit: cover; /* Recorta la imagen sin distorsionarla */
+    position: absolute; /* Permite que la imagen se ubique fuera del flujo normal */
+    left: -35px; /* Desplaza la imagen hacia la izquierda */
+    top: -27px; /* Desplaza la imagen hacia arriba */
+}
+
+.problem-section {
+    min-height: 100vh;
+    align-items: center;
     display: flex;
 }
