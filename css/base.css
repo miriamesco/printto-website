@@ -12,7 +12,7 @@ body {
 }
 
 .hero-section {
-    background: url('../img/background_S1.png') center/cover no-repeat;
+    background: url('../images/background_S1.png') center/cover no-repeat;
     min-height: calc(100vh - 66px);
     display: flex;
     align-items: center;
@@ -87,7 +87,7 @@ body {
 .app {
     padding: 4rem 2rem;
     text-align: center;
-    background-image: url('../img/tech-bg.png');
+    background-image: url('../images/tech-bg.png');
     background-size: cover;
 }
 
