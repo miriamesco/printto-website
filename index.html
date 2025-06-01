@@ -1,154 +1,721 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printto</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./img/favicon.png">
-    <script src="animations.js" defer></script>
-</head>
-
-<body>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav__logo">
-                <img src="./img/logo_transparente_baja.png" alt="logo">
-            </div>
-            <div class="nav__menu">
-                <a href="index.html" class="nav__link">Inicio</a>
-                <a href="#acerca_de" class="nav__link">Acerca de Printto</a>
-                <button class="btn btn--yellow">Reservar</button>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Section 1 - Hero -->
-        <section class="hero">
-            <div class="hero__content">
-                <img src="./img/logo_transparente_baja.png" alt="printto" class="hero__logo">
-                <h3 class="hero__title">Una forma innovadora de compartir tus recuerdos</h3>
-                <button class="btn btn--pink">¡RESERVÁ PRINTTO!</button>
-            </div>
-        </section>
-
-        <!-- Section 2 - Problema -->
-        <section class="problema">
-            <div class="S2">
-                <h2 class="section__title">¿ABURRIDO DE LAS FOTOCABINAS TRADICIONALES?</h2>
-            </div>
-            <div class="problema__content">
-                <p class="problema__text">LAS FOTOCABINAS TRADICIONALES SUELEN OFRECER UNA EXPERIENCIA ESTÁTICA Y LIMITADA, CON OPCIONES DE PERSONALIZACIÓN Y CREATIVIDAD BASTANTE LIMITADAS.</p>
-                <div class="problema__icon">
-                    <img src="./img/cabina-de-fotos (4).png" alt="Icono fotocabina">
-                </div>
-            </div>
-        </section>
+    <title>Printto - Scroll-Driven Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-
-        <!-- Section 3 - Video -->
-        <section id="acerca_de" class="video">
-            <div class="video__wrapper">
-                <div class="video__content">
-                    <h2 class="section__title S3">PRINTTO: LA EVOLUCIÓN DE<br>LAS FOTOCABINAS</h2>
-                    <div class="video__text">
-                        <p>¿Estás Cansado De Las Limitaciones Y<br>Frustraciones De Las Fotocabinas<br>Tradicionales?</p>
-                        <p>¡Entonces Es Hora De Conocer Printto!</p>
-                    </div>
-                </div>
-                <div class="video__container">
-                    <iframe class="video__iframe" width="560" height="315" 
-                        src="https://www.youtube.com/embed/X0FiTCcy2ro?si=yXjndJGCxHmv9Oa9" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Estilos para la barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            /*background-color: rgba(0, 0, 0, 0.8);*/
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-links a:hover, .navbar-links a.active {
+            color: #ff4500;
+        }
+        
+        .navbar-links .btn-reserva {
+            padding: 0.6rem 1.2rem;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .navbar-links .btn-reserva:hover, .navbar-links .btn-reserva:active, .navbar-links .btn-reserva.active {
+            background-color: #ff6a33;
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar-links .btn-reserva::after {
+            display: none;
+        }
+        
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff4500;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-links a:hover::after, .navbar-links a.active::after {
+            width: 100%;
+        }
+        
+        .navbar-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Estilos responsive para la barra de navegación */
+        @media (max-width: 768px) {
+            .navbar-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: right 0.5s ease;
+                z-index: 1001;
+            }
+            
+            .navbar-links.active {
+                right: 0;
+            }
+            
+            .navbar-toggle {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 30px;
+                height: 21px;
+                z-index: 1002;
+            }
+            
+            .navbar-toggle span {
+                display: block;
+                width: 100%;
+                height: 3px;
+                background-color: #fff;
+                transition: all 0.3s ease;
+            }
+            
+            .navbar-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .navbar-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .navbar-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+        
+        .frame-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        
+        #scroll-frame {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .content {
+            position: relative;
+            height: 300vh; /* 3x viewport height para las secciones con frames */
+        }
+        
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 1;
+        }
+        
+        .text-overlay p {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .text-overlay h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            padding: 1rem 2rem;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background-color: #ff6a33;
+            transform: scale(1.05);
+        }
+        
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: absolute;
+            width: 100%;
+            left: 0;
+        }
+        
+        #nosotros {
+            top: 100vh; /* Posiciona Nosotros después de Inicio */
+        }
+        
+        #caracteristicas {
+            top: 200vh; /* Posiciona Características después de Nosotros */
+        }
+        
+        /* Estilos para la sección de contacto por WhatsApp */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.85);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+        
+        .contact-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #444;
+        }
+        
+        .whatsapp-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .whatsapp-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .whatsapp-icon {
+            flex-shrink: 0;
+        }
+        
+        .whatsapp-text {
+            text-align: left;
+        }
+        
+        .whatsapp-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+        
+        .whatsapp-text p {
+            color: #444;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .whatsapp-button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-note {
+            margin-top: 1rem;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .whatsapp-note a {
+            color: #25D366;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .whatsapp-note a:hover {
+            color: #128C7E;
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .whatsapp-text {
+                text-align: center;
+            }
+        }
+        
+        .section-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos para la sección de características */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 69, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #ff4500;
+        }
+        
+        .feature-item p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><img src="assets/images/logo_printto.png" alt="Printto Logo"></a>
+        <div class="navbar-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#caracteristicas">Características</a>
+            <a href="#contacto" class="btn-reserva">Reserva</a>
+        </div>
+        <div class="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <div class="frame-container">
+        <img id="scroll-frame" src="assets/frames/landing_0001.jpg" alt="Animation Frame">
+    </div>
+    
+    <div class="content">
+        <div class="text-overlay" id="inicio">
+            <p>Transforma tus eventos en experiencias inolvidables con fotos instantáneas y personalizadas.</p>
+            <a href="#contacto" class="cta-button">Reserva ahora</a>
+        </div>
+        
+        <div class="section" id="nosotros">
+            <div class="section-content">
+                <h2 style="margin-bottom: 1.5rem; color: #ff4500; font-size: 2.2rem;">Reinventamos la experiencia fotográfica</h2>
+                <p style="font-size: 1.5rem; line-height: 1.6; margin-bottom: 1rem;">¿Cansado de las fotocabinas convencionales que ofrecen experiencias monótonas y limitadas?</p>
+                <p style="font-size: 1.3rem; line-height: 1.5;">En Printto transformamos cada evento en una experiencia única y memorable con tecnología de vanguardia y diseños personalizados.</p>
             </div>
-        </section>
-
-        <!-- Section 4 - Beneficios -->
-        <section class="beneficios">
-            <h2 class="section__title">BENEFICIOS DE PRINTTO</h2>
-            <div class="beneficios__grid">
-                <div class="beneficio_left">
-                    <div class="beneficio__icon">
-                        <img src="./img/papel-picado (2).png" alt="Recuerdos">
+        </div>
+        
+        <div class="section" id="caracteristicas">
+            <div class="section-content">
+                <h2>Características</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Innovación Constante</h3>
+                        <p>Adoptamos las últimas tecnologías para mantenernos a la vanguardia.</p>
                     </div>
-                    <div class="beneficio_text_1">RECUERDOS TANGIBLES</div>
-                </div>
-                <div class="beneficio_right">
-                    <div class="beneficio__icon_1">
-                        <img src="./img/impresora.png" alt="Fotos">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Diseño Personalizado</h3>
+                        <p>Creamos soluciones únicas adaptadas específicamente a las necesidades de cada cliente.</p>
                     </div>
-                    <div class="beneficio_text_2">FOTOS ILIMITADAS</div>
-                </div>
-                <div class="beneficio_left_2">
-                    <div class="beneficio__icon">
-                        <img src="./img/retratos.png" alt="Personalizado">
+                    <div class="feature-item">
+                        <div class="feature-icon">📷</div>
+                        <h3>Fotos ilimitadas</h3>
+                        <p>¡No hay límites! Sube tus fotos a nuestra app</p>
                     </div>
-                    <div class="beneficio_text_3">PERSONALIZADO</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5 - App -->
-        <section class="app">
-            <h2 class="section__title">EXPLORA PRINTTO: ¿CÓMO FUNCIONA LA APP?</h2>
-            <div class="app__carousel">
-                <button class="carousel__btn carousel__btn--prev">‹</button>
-                <div class="carousel__container">
-                    <div class="carousel__track">
-                        <img src="./img/App/1 png.png" alt="App Screenshots" class="carousel__img">
-                        <img src="./img/App/2 png.png" alt="App Screenshots" class="carousel__img">
-                        <img src="./img/App/3 png.png" alt="App Screenshots" class="carousel__img">
-                        <!-- Agrega más imágenes según necesites -->
+                    <div class="feature-item">
+                        <div class="feature-icon">👥</div>
+                        <h3>Social</h3>
+                        <p>¡Cada evento es una micro red social privada!</p>
                     </div>
-                </div>
-                <button class="carousel__btn carousel__btn--next">›</button>
-            </div>
-        </section>
-        <!-- Section 6 - CTA -->
-        <section id="reservar" class="cta">
-            <div class="cta__content">
-                <h2 class="section__title">¡ASEGURA MOMENTOS INOLVIDABLES!</h2>
-                <p class="cta__text">¿Listo para añadir un toque de diversión y emoción a tu próximo evento? ¡Reserva Printto ahora mismo y asegura recuerdos inolvidables para ti y tus invitados!</p>
-                <button class="btn btn--pink2">¡RESERVA PRINTTO!</button>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <h3 class="footer__title">SÍGUENOS Y MANTENTE INFORMADO</h3>
-        <div class="footer__content">
-            <div class="footer__contact">
-                <h4 class="footer__subtitle">CONTACTO</h4>
-                <div class="footer__item">
-                    <img src="./img/ubicacion.png" alt="ubicación" class="footer__icon">
-                    <p>Santiago, Chile</p>
-                </div>
-                <div class="footer__item">
-                    <img src="./img/correo.png" alt="correo" class="footer__icon">
-                    <p>printto@xxxx.com</p>
-                </div>
-            </div>
-            <div class="footer__social">
-                <h4 class="footer__subtitle">NUESTRAS REDES</h4>
-                <div class="footer__item">
-                    <img src="./img/whatsapp.png" alt="whatsapp" class="footer__icon">
-                    <p><a href="https://api.whatsapp.com/send/?phone=56964582362&text&type=phone_number&app_absent=0" target="blank" class="footer_link">56964582362</a></p>
-                </div>
-                <div class="footer__item">
-                    <img src="./img/instagram (1).png" alt="instagram" class="footer__icon">
-                    <p><a href="https://www.instagram.com/printto.cl/" target="blank" class="footer_link">printto.cl</a></p>
                 </div>
             </div>
         </div>
-        <div class="footer__bottom">
-            <p>© 2024 PRINTTO. TODOS LOS DERECHOS RESERVADOS | POLÍTICA DE PRIVACIDAD | TÉRMINOS Y CONDICIONES</p>
+        
+    </div>
+    
+    <!-- Sección de contacto por WhatsApp separada de los frames -->
+    <section class="contact-section" id="contacto">
+        <div class="contact-container">
+            <div class="contact-header">
+                <img src="assets/images/logo_printto.png" alt="Printto Logo" style="height: 60px; margin-bottom: 1.5rem;">
+                <h2>Contáctanos por WhatsApp</h2>
+                <p>¿Listo para dar vida a tus ideas? Envíanos un mensaje por WhatsApp y te responderemos al instante.</p>
+            </div>
+            
+            <div class="whatsapp-content">
+                <div class="whatsapp-info">
+                    <div class="whatsapp-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="80" height="80" fill="#25D366"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                    </div>
+                    <div class="whatsapp-text">
+                        <h3>Atención inmediata</h3>
+                        <p>Nuestro equipo está listo para atenderte de lunes a viernes de 9:00 AM a 6:00 PM.</p>
+                        <p>Envíanos un mensaje con tu consulta y te responderemos en minutos.</p>
+                    </div>
+                </div>
+                
+                <div class="whatsapp-button-container">
+                    <a href="https://wa.me/56946329342?text=Hola%20Printto%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." class="whatsapp-button" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" fill="#ffffff"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                        Iniciar chat en WhatsApp
+                    </a>
+                    <p class="whatsapp-note">O escríbenos directamente al: <a href="tel:+56946329342">+56 9 4632 9342</a></p>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const frameElement = document.getElementById('scroll-frame');
+            const content = document.querySelector('.content');
+            const sections = document.querySelectorAll('.section-content');
+            const navbar = document.querySelector('.navbar');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarLinks = document.querySelector('.navbar-links');
+            
+            // Configuración de frames
+            const totalFrames = 150; // Número total de frames disponibles
+            const framesPerSecond = 30; // Frames por segundo (máximo)
+            const frameBasePath = 'assets/frames/landing_';
+            
+            // Precargar todos los frames para un rendimiento óptimo
+            const frameImages = [];
+            for (let i = 1; i <= totalFrames; i++) {
+                const img = new Image();
+                const frameNumber = i.toString().padStart(4, '0'); // Formato: 0001, 0002, etc.
+                img.src = `${frameBasePath}${frameNumber}.jpg`;
+                frameImages.push(img);
+            }
+            
+            console.log(`Precargando ${totalFrames} frames...`);
+            
+            // Función para actualizar el frame según el scroll
+            function updateFrame() {
+                // Calcular el progreso del scroll (0 a 1)
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = content.offsetHeight - window.innerHeight;
+                const scrollProgress = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+                
+                // Calcular qué frame mostrar basado en el progreso del scroll
+                const frameIndex = Math.min(Math.floor(scrollProgress * totalFrames), totalFrames - 1);
+                const frameNumber = (frameIndex + 1).toString().padStart(4, '0');
+                
+                // Actualizar la imagen mostrada
+                frameElement.src = `${frameBasePath}${frameNumber}.jpg`;
+                
+                // Cambiar el estilo del navbar al hacer scroll
+                if (scrollTop > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // Actualizar la clase activa en el menú de navegación según la sección visible
+                const scrollPosition = scrollTop + window.innerHeight / 2;
+                
+                if (scrollPosition < window.innerHeight) {
+                    setActiveNavItem('#inicio');
+                } else if (scrollPosition < window.innerHeight * 2) {
+                    setActiveNavItem('#nosotros');
+                } else if (scrollPosition < window.innerHeight * 3) {
+                    setActiveNavItem('#caracteristicas');
+                } else {
+                    setActiveNavItem('#contacto');
+                }
+                
+                // Verificar si las secciones están en vista
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const isInView = rect.top < window.innerHeight * 0.75 && rect.bottom > 0;
+                    
+                    if (isInView) {
+                        section.classList.add('visible');
+                    } else {
+                        section.classList.remove('visible');
+                    }
+                });
+            }
+            
+            // Configurar el evento de scroll con throttling para mejor rendimiento
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateFrame();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Manejar el menú móvil
+            navbarToggle.addEventListener('click', function() {
+                navbarToggle.classList.toggle('active');
+                navbarLinks.classList.toggle('active');
+            });
+            
+            // Cerrar el menú móvil al hacer clic en un enlace
+            document.querySelectorAll('.navbar-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navbarToggle.classList.remove('active');
+                    navbarLinks.classList.remove('active');
+                });
+            });
+            
+            // Función para establecer el elemento activo en la navegación
+            function setActiveNavItem(targetId) {
+                document.querySelectorAll('.navbar-links a').forEach(item => {
+                    if (item.getAttribute('href') === targetId) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Scroll suave para los enlaces de navegación
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    let scrollTarget = 0;
+                    
+                    // Determinar la posición de desplazamiento según la sección objetivo
+                    if (targetId === '#inicio') {
+                        scrollTarget = 0;
+                    } else if (targetId === '#nosotros') {
+                        scrollTarget = window.innerHeight;
+                    } else if (targetId === '#caracteristicas') {
+                        scrollTarget = window.innerHeight * 2;
+                    } else if (targetId === '#contacto') {
+                        const contactSection = document.querySelector('#contacto');
+                        scrollTarget = contactSection.offsetTop;
+                    }
+                    
+                    // Realizar el desplazamiento suave
+                    window.scrollTo({
+                        top: scrollTarget,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Actualizar elemento activo en la navegación
+                    setActiveNavItem(targetId);
+                });
+            });
+            
+            // Inicializar con el primer frame
+            updateFrame();
+            console.log('Sistema de frames inicializado');
+            
+            // No necesitamos manejar el formulario ya que ahora usamos WhatsApp
+        });
+    </script>
 </body>
 </html>
